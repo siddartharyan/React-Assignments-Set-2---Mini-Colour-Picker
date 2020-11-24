@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ColourSelector from "./ColourSelector";
+import Selection from "./Selection.js";
 import "../styles/App.css";
 const colourConfig = [
   {
@@ -30,34 +32,10 @@ export function App() {
     { background: "" },
     { background: "" }
   ]);
-  const applyColor = (updateSelectionStyle) => {
-    updateSelectionStyle(nextBackground);
-  };
-  const ColourSelector = (props) => {
-    const { config, selectNextBackground } = props;
-    const { background } = config;
-    return (
-      <button
-        className={config.classname}
-        onClick={() => selectNextBackground({ background: background })}
-      >
-        {config.label}
-      </button>
-    );
-  };
-
-  const Selection = ({ applyColor, index }) => {
-    const change = () => {
-      let dup = [...backGround];
-      dup[index] = nextBackground;
-      setBackGround(dup);
-      applyColor(selectNextBackground);
-    };
-    return (
-      <div className="fix-box" onClick={change} style={backGround[index]}>
-        <h2 className="subheading">Selection</h2>
-      </div>
-    );
+  const applyColor = (index) => {
+    let dup = [...backGround];
+    dup[index] = nextBackground;
+    setBackGround(dup);
   };
   return (
     <div id="master">
@@ -75,7 +53,12 @@ export function App() {
 
       <div className="row" id="children-wrapper">
         {["selection1", "selection2", "selection3"].map((key, index) => (
-          <Selection index={index} key={key} applyColor={applyColor} />
+          <Selection
+            index={index}
+            key={key}
+            applyColor={applyColor}
+            backGround={backGround}
+          />
         ))}
       </div>
     </div>
