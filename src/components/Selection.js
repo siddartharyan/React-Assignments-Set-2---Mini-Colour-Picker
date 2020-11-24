@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Child.css";
-const Selection = ({ applyColor, nextBackground }) => {
+const Selection = ({
+  applyColor,
+  nextBackGround,
+  index,
+  selectNextBackground
+}) => {
+  let [backGround, setBackGround] = useState([
+    { background: "" },
+    { background: "" },
+    { background: "" }
+  ]);
+  const change = () => {
+    let dup = [...backGround];
+    dup[index] = nextBackGround;
+    setBackGround(dup);
+    applyColor(selectNextBackground);
+  };
   return (
-    <div className="fix-box" style={nextBackground}>
+    <div className="fix-box" onClick={change} style={backGround[index]}>
       <h2 className="subheading">Selection</h2>
     </div>
   );

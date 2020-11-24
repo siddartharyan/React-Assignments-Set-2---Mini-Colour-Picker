@@ -51,7 +51,7 @@ export function App() {
       let dup = [...backGround];
       dup[index] = nextBackground;
       setBackGround(dup);
-      selectNextBackground(dup[index]);
+      applyColor(selectNextBackground);
     };
     return (
       <div className="fix-box" onClick={change} style={backGround[index]}>
